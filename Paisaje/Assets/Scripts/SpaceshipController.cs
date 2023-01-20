@@ -15,7 +15,7 @@ public class SpaceshipController : MonoBehaviour
 
     void Update()
     {
-        float rotationZ = -Input.GetAxis("Vertical") * speedRotationVertical * Time.deltaTime;
+        float rotationZ = Input.GetAxis("Vertical") * speedRotationVertical * Time.deltaTime;
         float rotationY = Input.GetAxis("Horizontal") * speedRotationHorizontal * Time.deltaTime;
         float rotationX = -Input.GetAxis("Horizontal") * speedRotationHorizontal * Time.deltaTime;
 
