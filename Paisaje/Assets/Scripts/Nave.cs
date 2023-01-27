@@ -8,7 +8,7 @@ public class Nave : MonoBehaviour
     GameObject[] ruta;
 
     [SerializeField]
-    int i = 0;
+    int i = 1, speed = 5;
 
     [SerializeField]
     float posicionX, posicionY, posicionZ;
@@ -16,7 +16,7 @@ public class Nave : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.LookAt(ruta[i].transform);
     }
 
     // Update is called once per frame
@@ -25,20 +25,20 @@ public class Nave : MonoBehaviour
         if(i > ruta.Length - 1)
         {
             i = 0;
-        }
-        
-        transform.LookAt(ruta[i].transform);
+        }        
 
         posicionX = ruta[i].transform.position.x;
         posicionY = ruta[i].transform.position.y;
         posicionZ = ruta[i].transform.position.z;
 
-        transform.position += transform.forward * Time.deltaTime * 10;
+        transform.position += transform.forward * Time.deltaTime * speed;             
+    }
 
-        if (transform.position.x == posicionX && transform.position.y == posicionY && transform.position.z == posicionZ)
-        {
-            i++;
-        }        
+    private void OnTriggerEnter(Collider punto)
+    {
+        i++;
+        transform.LookAt(ruta[i].transform);
+        Debug.Log(i);
     }
 }
 
