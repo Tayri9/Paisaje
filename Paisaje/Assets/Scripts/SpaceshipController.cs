@@ -13,6 +13,9 @@ public class SpaceshipController : MonoBehaviour
     [SerializeField]
     float speedRotationHorizontal = 30f;
 
+    [SerializeField]
+    GameObject bala;
+
     void Update()
     {
         float rotationX = Input.GetAxis("Vertical") * speedRotationVertical * Time.deltaTime;
@@ -22,6 +25,16 @@ public class SpaceshipController : MonoBehaviour
         transform.Rotate(rotationX, rotationY, rotationZ, Space.Self);
 
         transform.position += (transform.forward * Time.deltaTime * speed);
-        
+
+        if (Input.GetMouseButtonUp(0))
+        {
+
+            Instantiate(bala, gameObject.transform.position, gameObject.transform.rotation);
+
+            //Instantiate(bala, gameObject.transform.position, Quaternion.identity);
+            //Instantiate(bala, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 3, gameObject.transform.position.z), gameObject.transform.rotation);
+        }
     }
 }
+
+//3
