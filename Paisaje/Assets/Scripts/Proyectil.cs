@@ -5,7 +5,7 @@ using UnityEngine;
 public class Proyectil : MonoBehaviour
 {
     [SerializeField]
-    float speed = 20, time = 0;
+    float speed = 60, time = 0;
     // Start is called before the first frame update
     void Start()
     {

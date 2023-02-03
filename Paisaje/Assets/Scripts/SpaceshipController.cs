@@ -14,13 +14,16 @@ public class SpaceshipController : MonoBehaviour
     float speedRotationHorizontal = 30f;
 
     [SerializeField]
+    float speedRotationHorizontal2 = 20f;
+
+    [SerializeField]
     GameObject bala;
 
     void Update()
     {
         float rotationX = Input.GetAxis("Vertical") * speedRotationVertical * Time.deltaTime;
         float rotationY = Input.GetAxis("Horizontal") * speedRotationHorizontal * Time.deltaTime;
-        float rotationZ = -Input.GetAxis("Horizontal") * speedRotationHorizontal * Time.deltaTime;
+        float rotationZ = -Input.GetAxis("Horizontal") * speedRotationHorizontal2 * Time.deltaTime;
 
         transform.Rotate(rotationX, rotationY, rotationZ, Space.Self);
 
