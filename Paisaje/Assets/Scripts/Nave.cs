@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Nave : MonoBehaviour
 {
-    [SerializeField]
+    //[SerializeField]
     GameObject[] ruta;
 
     [SerializeField]
@@ -17,6 +17,7 @@ public class Nave : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ruta = SpawnEnemigo.instance.ruta;
         transform.LookAt(ruta[i].transform);
     }
 
@@ -31,7 +32,17 @@ public class Nave : MonoBehaviour
 
             if(time >= 3)
             {
+                SpawnEnemigo.instance.spawn = true;
                 Destroy(gameObject);
+                /*
+                gameObject.SetActive(false);
+                i = 0;                
+                vivo = true;
+                gameObject.SetActive(true);
+                transform.position = ruta[i].transform.position;
+                transform.LookAt(ruta[i].transform);
+                gameObject.GetComponent<Collider>().attachedRigidbody.useGravity = false;
+                */
             }
         }                  
     }
@@ -56,12 +67,16 @@ public class Nave : MonoBehaviour
             if (vida == 0)
             {
                 vivo = false;
-                gameObject.GetComponent<Collider>().attachedRigidbody.useGravity = true;
-                speed -= 5;
+                gameObject.GetComponent<Collider>().attachedRigidbody.useGravity = true;                
                 //Destroy(gameObject);                
             }
         }
        
+    }
+
+    void destruirNave()
+    {
+
     }
 }
 

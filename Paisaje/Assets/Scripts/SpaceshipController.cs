@@ -29,7 +29,7 @@ public class SpaceshipController : MonoBehaviour
 
         transform.position += (transform.forward * Time.deltaTime * speed);
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
         {
 
             Instantiate(bala, gameObject.transform.position, gameObject.transform.rotation);
