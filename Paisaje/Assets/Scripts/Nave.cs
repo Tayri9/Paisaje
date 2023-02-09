@@ -33,16 +33,7 @@ public class Nave : MonoBehaviour
             if(time >= 3)
             {
                 SpawnEnemigo.instance.spawn = true;
-                Destroy(gameObject);
-                /*
-                gameObject.SetActive(false);
-                i = 0;                
-                vivo = true;
-                gameObject.SetActive(true);
-                transform.position = ruta[i].transform.position;
-                transform.LookAt(ruta[i].transform);
-                gameObject.GetComponent<Collider>().attachedRigidbody.useGravity = false;
-                */
+                Destroy(gameObject);                
             }
         }                  
     }
@@ -71,13 +62,17 @@ public class Nave : MonoBehaviour
                 //Destroy(gameObject);                
             }
         }
-       
+        
     }
 
-    void destruirNave()
+    private void OnCollisionEnter(Collision collision)
     {
-
+        Debug.Log("collision");
+        vivo = false;
+        gameObject.GetComponent<Collider>().attachedRigidbody.useGravity = true;
     }
+
+    
 }
 
 /*

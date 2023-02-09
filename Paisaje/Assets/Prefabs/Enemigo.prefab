@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3630852252841697086}
   m_Layer: 0
   m_Name: Enemigo
-  m_TagString: Untagged
+  m_TagString: Enemigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,14 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089b4d2815f5ec640984fc0c24ee962b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ruta:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   i: 0
   speed: 12
   vida: 5
