@@ -10,6 +10,10 @@ public class Nave : MonoBehaviour
     [SerializeField]
     int i = 0, speed = 11, vida = 5;
 
+    bool vivo = true;
+
+    float time = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +23,23 @@ public class Nave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * speed;             
+        transform.position += transform.forward * Time.deltaTime * speed;
+
+        if (!vivo)
+        {
+            time += Time.deltaTime;
+
+            if(time >= 3)
+            {
+                Destroy(gameObject);
+            }
+        }                  
     }
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("Punto")){
+        if (col.CompareTag("Punto"))
+        {
             i++;
             if (i >= ruta.Length)
             {
@@ -33,15 +48,20 @@ public class Nave : MonoBehaviour
             transform.LookAt(ruta[i].transform);
             //Debug.Log("punto: " + col + " i: " + i);
         }
-        
+
         if (col.CompareTag("Bala"))
         {
-            Debug.Log("Tocado");
+            //Debug.Log("Tocado");
             vida--;
-            if (vida == 0){
-                Destroy(gameObject);                
+            if (vida == 0)
+            {
+                vivo = false;
+                gameObject.GetComponent<Collider>().attachedRigidbody.useGravity = true;
+                speed -= 5;
+                //Destroy(gameObject);                
             }
         }
+       
     }
 }
 

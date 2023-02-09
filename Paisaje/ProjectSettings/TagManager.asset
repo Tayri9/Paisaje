@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Punto
   - Bala
+  - Terreno
   layers:
   - Default
   - TransparentFX
