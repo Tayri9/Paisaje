@@ -24,6 +24,8 @@ public class SpaceshipController : MonoBehaviour
 
     bool vivo = true;
     float time = 0;
+    float max, min, t;
+
 
     void Update()
     {
@@ -34,14 +36,14 @@ public class SpaceshipController : MonoBehaviour
             float rotationX = Input.GetAxis("Vertical") * speedRotationVertical * Time.deltaTime;
             float rotationY = Input.GetAxis("Horizontal") * speedRotationHorizontal * Time.deltaTime;
             float rotationZ = -Input.GetAxis("Horizontal") * speedRotationHorizontal2 * Time.deltaTime;
-                     
 
+            
             if(Input.GetAxis("Vertical") == 0)
             {
-                transform.eulerAngles = new Vector3(Mathf.LerpAngle(rotationX, 0, Time.time), 0, 0);
+                t = 0;
             }
-
-            transform.Rotate(rotationX, rotationY, rotationZ, Space.Self);
+            
+            transform.Rotate(Mathf.LerpAngle(min, max, t), rotationY, rotationZ, Space.Self);
             transform.position += (transform.forward * Time.deltaTime * speed);
 
             //Disparar
