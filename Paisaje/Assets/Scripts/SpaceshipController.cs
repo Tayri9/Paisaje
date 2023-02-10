@@ -23,9 +23,17 @@ public class SpaceshipController : MonoBehaviour
     Vector3 posicionInicial, rotacionInicial;
 
     bool vivo = true;
-    float time = 0;
-    float max, min, t;
+    float timepoReaparicion = 0;
 
+    [SerializeField]
+    float tiempoDisparo = 0.75f;
+
+    bool puedeDisparar = true;
+    float time = 0;
+
+    bool powerUp;
+    float timePower = 0;
+    float timeWithPowerUp = 20;
 
     void Update()
     {
@@ -37,33 +45,71 @@ public class SpaceshipController : MonoBehaviour
             float rotationY = Input.GetAxis("Horizontal") * speedRotationHorizontal * Time.deltaTime;
             float rotationZ = -Input.GetAxis("Horizontal") * speedRotationHorizontal2 * Time.deltaTime;
 
-            
+            /*
             if(Input.GetAxis("Vertical") == 0)
             {
                 t = 0;
             }
-            
             transform.Rotate(Mathf.LerpAngle(min, max, t), rotationY, rotationZ, Space.Self);
+            */
+            transform.Rotate(rotationX, rotationY, rotationZ, Space.Self);
             transform.position += (transform.forward * Time.deltaTime * speed);
 
             //Disparar
-            if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
             {
-                Instantiate(bala, gameObject.transform.position, gameObject.transform.rotation);
+                if (puedeDisparar)
+                {
+                    Instantiate(bala, gameObject.transform.position, gameObject.transform.rotation);
+                    puedeDisparar = false;
+                }
+
+                if (!puedeDisparar)
+                {
+                    time += Time.deltaTime;
+                    if (time >= tiempoDisparo)
+                    {
+                        puedeDisparar = true;
+                        time = 0;
+                    }
+                }
             }
+
+            if (!puedeDisparar)
+            {
+                time += Time.deltaTime;
+                if(time >= tiempoDisparo)
+                {
+                    puedeDisparar = true;
+                    time = 0;
+                }
+            }
+
+            if (powerUp)
+            {
+                timePower += Time.deltaTime;               
+
+                if(timePower >= timeWithPowerUp)
+                {
+                    powerUp = false;
+                    timePower = 0;
+                    tiempoDisparo *= 2;
+                }
+            }
+
         }
         //Cuando se choca
         else
         {
-            time += Time.deltaTime;
+            timepoReaparicion += Time.deltaTime;
 
-            if (time >= 3)
+            if (timepoReaparicion >= 3)
             {   
                 
                 transform.SetPositionAndRotation(posicionInicial, Quaternion.Euler(rotacionInicial));
-                gameObject.GetComponent<Collider>().attachedRigidbody.useGravity = false;
+                //gameObject.GetComponent<Collider>().attachedRigidbody.useGravity = false;
                 vivo = true;
-                time = 0;
+                timepoReaparicion = 0;
             }
         }
     }
@@ -71,7 +117,17 @@ public class SpaceshipController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         vivo = false;
-        gameObject.GetComponent<Collider>().attachedRigidbody.useGravity = true;
+        //gameObject.GetComponent<Collider>().attachedRigidbody.useGravity = true;
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.CompareTag("PowerUp"))
+        {
+            DestroyPowerUp.instance.Destruir();
+            powerUp = true;
+            tiempoDisparo /= 2;
+        }
     }
 
 }

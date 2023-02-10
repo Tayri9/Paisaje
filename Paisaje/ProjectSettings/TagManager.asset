@@ -8,6 +8,7 @@ TagManager:
   - Bala
   - Terreno
   - Enemigo
+  - PowerUp
   layers:
   - Default
   - TransparentFX
