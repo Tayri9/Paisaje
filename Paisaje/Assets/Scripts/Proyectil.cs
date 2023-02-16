@@ -6,6 +6,9 @@ public class Proyectil : MonoBehaviour
 {
     [SerializeField]
     float speed = 60, time = 0;
+
+    //Vector3 direccionFuerza;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +18,8 @@ public class Proyectil : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //gameObject.GetComponent<Rigidbody>().AddForce(direccionFuerza, ForceMode.Impulse);
+
         transform.position += transform.forward * Time.deltaTime * speed;
         time += Time.deltaTime;
 

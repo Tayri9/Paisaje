@@ -74,7 +74,7 @@ public class SpaceshipController : MonoBehaviour
                     }
                 }
             }
-
+            
             if (!puedeDisparar)
             {
                 time += Time.deltaTime;
